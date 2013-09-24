@@ -1,0 +1,27 @@
+# compiladas
+#
+*.class
+*.dll
+*.exe
+*.[oa]
+*.so
+*.pyc
+
+#
+# Ficheros generados por el SO
+#
+.DS_Store?
+ehthumbs.db
+Thumbs.db
+.project
+.settings/*
+
+.pydevproject
+# Ignore bundler config
+/.bundle
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
+
+# Ignore all logfiles and tempfiles.
+/node_modules/*

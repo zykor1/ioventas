@@ -1,0 +1,28 @@
+div.modal.fade#modalComentarArticulo(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
+	div.modal-dialog
+		div.modal-content
+			div.modal-header
+				button.close(type="button", data-dismiss="modal", aria-hidden="true") &times;
+				h4#tituloModalComentar Comentar Articulo.
+			div.modal-body
+				div#alertaAddComentario.alert.alert-dismissable.alert-info.hide
+					button.close(type="button", data-dismiss="alert", aria-hidden="true")&times;
+					p#mensajeAlertaAddComentario Hola
+
+				form#addComentariosForm(action="/addComentario", method="post", enctype="multipart/form-data")
+						div.form-group
+							label.label.label-info(for="descripcion") Comentario
+							textarea#textAreacomentario.offresize.form-control(rows=5 ,placeholder="Ingresa tu pregunta o comentario", name="comentario", required)
+							p.help-block Ejemplo: Cuanto quedaria el precio con el envio a puebla
+							input.form-control#articuloField(value=articulo.id, type="hidden", name="articulo")
+							input.form-control#id_comentarioField(type="hidden", name="id_comentario")
+			div.modal-footer
+				button.btn.btn-default(type="button", data-dismiss="modal") Cancelar
+				button#botonModalComentarArticulo.btn.btn-primary(type="button", onClick='enviaComentario()') Enviar
+div.row
+	div.container
+		h3 Comentarios 
+			a.btn.btn-primary.btn-lg(data-placement="bottom",  data-toggle="modal", href="#modalComentarArticulo", rel="tooltip", title="Comenta este articulo")
+				span.glyphicon.glyphicon-comment.pull-right 
+		div#mostrarComentarios
+		

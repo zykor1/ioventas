@@ -1,0 +1,233 @@
+/* pantallas fhd y mayores**/
+@media screen and (min-width: 1920px) {
+
+
+#fondo{
+	background: url("/images/fondo2.jpg") 100% no-repeat;
+	background-position: center top;
+	height: 50em;
+}
+
+#logo{
+	margin: -3em -20em 0em;
+}
+
+
+
+#cuadro_1{
+	margin-top:-9em;
+	width: 20em;
+	height: 25em;
+	background-color: white;
+	margin-left: 0em;
+}
+
+#cuadro_2{
+	margin-top:-9em;
+	width: 20em;
+	height: 25em;
+	background-color: white;
+	margin-left: 10em;
+}
+
+#cuadro_3{
+	margin-top:-9em;
+	width: 20em;
+	height: 25em;
+	background-color: white;
+	margin-left: 10em;
+}
+
+#jumbo{
+	margin: 2em 0em 2em;
+}
+
+}
+
+/* pantallas mas pequeñas**/
+@media screen and (min-width: 1200px) and (max-width: 1919px) {
+
+
+
+
+#fondo{
+	background: url("/images/fondo2.jpg") 100% no-repeat;
+	background-position: center top;
+	height: 40em;
+}
+
+#logo{
+	margin: -3em -2em 0em;
+}
+
+
+
+#cuadro_1{
+	margin-top:-9em;
+	width: 32%;
+	height: 25em;
+	background-color: white;
+	margin-left: 1%;
+}
+
+#cuadro_2{
+	margin-top:-9em;
+	width: 32%;
+	height: 25em;
+	background-color: white;
+	margin-left: 1%;
+}
+
+#cuadro_3{
+	margin-top:-9em;
+	width: 32%;
+	height: 25em;
+	background-color: white;
+	margin-left: 1%;
+}
+
+#jumbo{
+	margin: 2em 0em 2em;
+}
+
+}
+
+/* pantallas aun mas pequeñas**/
+@media screen and (min-width: 760px) and (max-width: 1199px) {
+
+
+
+#fondo{
+	background: url("/images/fondo2.jpg") 100% no-repeat;
+	background-position: center top;
+	height: 30em;
+}
+
+#logo{
+	margin: -3em -2em 0em;
+}
+
+
+
+#cuadro_1{
+	margin-top:-9em;
+	width: 16em;
+	height: 25em;
+	background-color: white;
+	margin-left: 1%
+}
+
+#cuadro_2{
+	margin-top:-9em;
+	width: 16em;
+	height: 25em;
+	background-color: white;
+	margin-left: 1%
+}
+
+#cuadro_3{
+	margin-top:-9em;
+	width: 16em;
+	height: 25em;
+	background-color: white;
+	margin-left: 1%
+}
+
+#jumbo{
+	margin: 2em 0em 2em;
+}
+
+}
+
+/* pantallas aun mas mas pequeñas**/
+@media screen and (min-width: 400px) and (max-width: 759px) {
+
+
+
+#fondo{
+	background: url("/images/fondo2.jpg") 100% no-repeat;
+	background-position: center top;
+	height: 30em;
+}
+
+#logo{
+	margin: -3em -2em 0em;
+}
+
+
+
+#cuadro_1{
+	margin-top:-9em;
+	height: 25em;
+	width: 32%;
+	background-color: white;
+	margin-left: 1%;
+}
+
+#cuadro_2{
+	margin-top:-9em;
+	height: 25em;
+	width: 32%;
+	background-color: white;
+	margin-left: 1%;
+}
+
+#cuadro_3{
+	margin-top:-9em;
+	height: 25em;
+	width: 32%;
+	background-color: white;
+	margin-left: 1%;
+}
+
+#jumbo{
+	margin: 2em 0em 2em;
+}
+
+}
+
+
+
+/* pantallas aun mas pequeñas celulares y otros **/
+@media screen and (max-width: 399px){
+
+
+#fondo{
+	background: url("/images/fondo2.jpg") 100% no-repeat;
+	background-position: center top;
+	background-size: 100% 100%;
+	height: 10em;
+}
+
+#logo{
+	margin: -1em 0em 0em;
+	width: 70%;
+	height: 70%;
+}
+
+
+
+#cuadro_1{
+	height: 25em;
+	background-color: white;
+	width: auto;
+}
+
+#cuadro_2{
+	height: 25em;
+	background-color: white;
+	width: auto;
+}
+
+#cuadro_3{
+	height: 25em;
+	background-color: white;
+	width: auto;
+}
+
+#jumbo{
+	margin: 2em 0em 2em;
+}
+
+}
+

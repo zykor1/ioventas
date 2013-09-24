@@ -1,0 +1,61 @@
+/*Se usa para mover la imagen y nombre de usuario*/
+#spanImg{
+	margin: 0em -2em 0em;
+}
+
+
+/* vender.jade**/
+#uploadedImage{
+	height: 107px;
+}
+
+
+
+/* Principal.jade**/
+
+#cuadroPrincipal{
+	height: 31em;
+	margin-bottom: 2em; 
+}
+
+#imagenCuadro{
+
+	height: 16em;
+}
+
+/*  Para adactar los textos a los divs o cosas raras**/
+#wordwrap { 
+   white-space: pre-wrap;      /* CSS3 */   
+   white-space: -moz-pre-wrap; /* Firefox */    
+   white-space: -pre-wrap;     /* Opera <7 */   
+   white-space: -o-pre-wrap;   /* Opera 7 */    
+   word-wrap: break-word;      /* IE */
+}
+
+#float-boot{
+	position:relative;
+	bottom:-2.25em;
+}
+
+/* Lo uso para desaparecer partes que no quiero que se vean xD*/
+.hide {
+    display: none;
+}
+
+/* Lo uso para que los textArea no tengan rezise */
+.offresize{
+	resize: none;
+}
+/* end principal.jade **/
+
+
+/* Begin mostrarArticulo.jade **/
+
+#imagenArticulo{
+	height: 25em;
+}
+
+/* Sirve para pintar el comentario del vendedor */ 
+.comentarioVendedor{
+	background-color: #FFFFDC;
+}

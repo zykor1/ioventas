@@ -1,0 +1,117 @@
+extends ../layout
+block index
+	- var articulo = articulo1[Object.keys(articulo1)[0]]
+	nav.navbar(role="navigation")
+		div#links.navbar-fixed-top
+			div.col-lg-3.col-md-3.col-sm-3.col-xs-3
+				img#spanImg(src='https://graph.facebook.com/#{everyauth.facebook.user.id}/picture?width=80&height=80')
+				span#spanImg.label.label-primary #{ everyauth.facebook.user.name }
+			div.panel.panel-default
+				a.btn.btn-info(data-placement="bottom", rel="tooltip", data-toggle="tooltip", title="Ir a inicio", href="/principal")
+					span.glyphicon.glyphicon-home
+				|-
+				a.btn.btn-primary(data-placement="bottom", rel="tooltip", data-toggle="tooltip", title="Mis articulos",href="/misArticulos") 
+					span.glyphicon.glyphicon-th-large
+				|-
+				a.btn.btn-success(data-placement="bottom", rel="tooltip", data-toggle="tooltip", title="Ir a vender",href="/vender") 
+					span.glyphicon.glyphicon-usd
+				|---|---
+				a.btn.btn-primary(data-placement="bottom",  data-toggle="modal", href="#modalComentarArticulo", rel="tooltip", title="Comenta este articulo")
+					span.glyphicon.glyphicon-comment
+				|-
+				if everyauth.userId == articulo._creador._id
+					- var titulo = articulo.titulo.replace(/ /g,"_");
+					a.btn.btn-warning(data-placement="bottom", rel="tooltip", data-toggle="tooltip", title="Editar articulo", href="/edita/#{articulo.id}/#{titulo}")
+						span.glyphicon.glyphicon-pencil
+					|-
+					if articulo.postFaceId == undefined
+						a#botonPublicaFacebook.btn.btn-primary(onClick="publicaFace(\'#{articulo.id}\')", data-placement="bottom", rel="tooltip", data-toggle="tooltip", title="Publicar en facebook", href="#")
+							span.glyphicon.glyphicon-cloud-upload
+						|-
+					a.btn.btn-danger(data-placement="bottom",onClick="mandaEliminar(\'#{articulo.id}\', \'mostrarArticulo\')", data-toggle="modal", href="#modalEliminaArticulo", rel="tooltip", title="Eliminar este articulo")
+						span.glyphicon.glyphicon-trash
+	div.row
+		div.container
+			br
+			h2= articulo.titulo
+			div.col-lg-6
+				if articulo.imagenes == undefined
+					div.thumbnail
+						img#imagenArticulo(src="/img/no_imagen.png")
+				else
+					if articulo.imagenes.length  > 1
+						div.carousel.slide(id=articulo.id)
+							ol.carousel-indicators
+								each imagen,i in articulo.imagenes
+									if i === 0
+										li.active(data-target="##{articulo.id}", data-slide-to=i)
+									else
+										li(data-target="##{articulo.id}", data-slide-to=i)
+							div.carousel-inner
+								each imagen,i in articulo.imagenes
+									if i === 0
+										div.item.active.thumbnail
+											img#imagenArticulo(src=imagen.imagen)
+									else
+										div.item.thumbnail
+											img#imagenArticulo(src=imagen.imagen)														
+							a.left.carousel-control(data-slide="prev", href="##{articulo.id}")
+								span.icon-prev
+							a.right.carousel-control(data-slide="next", href="##{articulo.id}")
+								span.icon-next
+					else
+						each imagen in articulo.imagenes
+							div.thumbnail#MostraGrande
+								img#imagenArticulo(src=imagen.imagen)
+			div.col-lg-5
+				h3 $ #{articulo.precio} #{articulo.tipo_moneda}
+					br
+					small
+						strong Vendedor: 
+						| #{articulo._creador.name }
+					br
+					if  ( articulo.precio_negociable == true)
+						small
+							strong Precio negociable
+						br	
+					else
+						small
+							strong Precio no negociable
+						br
+					if (articulo.local == true)
+						small
+							strong Entrega solo de forma local
+						br
+					else
+						small
+							strong Envio a toda la republica
+				if ( articulo.precio_negociable == true)
+					button.btn.btn-primary.btn-lg Enviar propuesta
+				else
+					button.btn.btn-primary.btn-lg Comprar ahora
+	div.row
+		div.container
+			br
+			!= articulo.descripcion
+	include ../comentarios/comentarios
+	div.modal.fade#modalEliminaArticulo(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
+		div.modal-dialog
+			div.modal-content
+				div.modal-header
+					button.close(type="button", data-dismiss="modal", aria-hidden="true") &times;
+					h4 Seguro que deseas eliminar el articulo.
+				div.modal-body
+					p Si eliminas el articulo el cambio sera permanente ¿estas seguro?
+				div.modal-footer
+					button.btn.btn-default(type="button", data-dismiss="modal") Cancelar
+					button#botonModalEliminarArticulo.btn.btn-danger(type="button") Eliminar
+	div#modals
+block append foot
+	script(src="http://malsup.github.com/jquery.form.js")
+	script(src="/js/yosoyventas/misArticulos.js")
+	script(src="/js/yosoyventas/comentarios.js")
+	script(type='text/javascript').
+		$('.carousel').carousel();
+		mostrarComentarios("#{articulo.id}");
+		$('[rel="tooltip"]').tooltip();
+		

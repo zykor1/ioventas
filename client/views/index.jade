@@ -1,0 +1,34 @@
+extends layout
+block head
+	|<link href='http://fonts.googleapis.com/css?family=Jacques+Francois' rel='stylesheet' type='text/css'>
+	|<link href='http://fonts.googleapis.com/css?family=Petit+Formal+Script' rel='stylesheet' type='text/css'>
+block index
+	div.row#fondo
+		div.container
+			img#logo(src = "/images/logo.png")
+	div.row
+		div.container
+			div.thumbnail#cuadro_1.col-lg-3.col-md-3.col-sm-3.col-xs-3
+				img.thumbnail(src="/images/vender.jpg")
+				div.caption
+					h3 Ofrece Todo ...
+					p Vende todo lo que desees sin restricciones y compártelo en Facebook.
+			div.thumbnail#cuadro_2.col-lg-3.col-md-3.col-sm-3.col-xs-3
+				img.thumbnail(src="/images/comprar.jpg")
+				div.caption
+					h3 Encuentra Todo ...
+					p Encuentra todo lo que necesites, casas, autos, electrodomésticos, etc.
+			div.thumbnail#cuadro_3.col-lg-3.col-md-3.col-sm-3.col-xs-3
+				img.thumbnail(src="/images/cambiar.jpg")
+				div.caption	
+					h3 Cambia Todo ...
+					p Cambia todo lo que desees de forma rápida y segura.
+	div.row
+		div.container
+			div.jumbotron#jumbo
+				h1 ¡Esperanos!
+				p Estamos trabajando para que pronto puedes disfrutar de la pagina. Si deseas ser de los primeros en disfrutar de la web 
+					b Yo Soy Ventas 
+					|registrate ahora.
+				p.text-center
+					a.btn.btn-primary.btn-lg(href="auth/facebook") Registrate

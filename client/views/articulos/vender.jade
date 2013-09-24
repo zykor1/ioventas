@@ -1,0 +1,106 @@
+extends ../layout
+block index
+	nav.navbar(role="navigation")
+		div#links.navbar-fixed-top
+			div.col-lg-3.col-md-3.col-sm-3.col-xs-3
+				img#spanImg(src='https://graph.facebook.com/#{everyauth.facebook.user.id}/picture?width=80&height=80')
+				span#spanImg.label.label-primary #{ everyauth.facebook.user.name }
+			div.panel.panel-default
+				a.btn.btn-info(data-placement="bottom", rel="tooltip", data-toggle="tooltip", title="Ir a inicio", href="/principal")
+					span.glyphicon.glyphicon-home
+				|-
+				a.btn.btn-primary(data-placement="bottom", rel="tooltip", data-toggle="tooltip", title="Mis articulos",href="/misArticulos") 
+					span.glyphicon.glyphicon-th-large
+				|-
+				a.btn.btn-success(data-placement="bottom", rel="tooltip", data-toggle="tooltip", title="Ir a vender",href="/vender") 
+					span.glyphicon.glyphicon-usd
+				|-
+	div.row
+		div.container
+			div.row
+				div#alerta
+					if exito == undefined
+						h2 Producto a vender
+					else
+						h2 #{ exito }
+			form.form-inline#uploadForm(action="/vender/subirImagen", method="post", enctype="multipart/form-data")
+				div.form-group
+					a.btn.btn-primary#status(href="#")
+					input.hide#userPhotoInput.form-control(type="file", placeholder="Agregar imagen", name="imagen", accept="image/*") Elige imagen
+				div.row#imagenes
+					div.media
+			form#informacionForm(action="/vender", method="post", enctype="multipart/form-data")
+				div.form-group
+					div.form-inline
+						div.form-group
+							label.label.label-info(for="titulo") Titulo
+							input.form-control(type="text", maxlength="70", placeholder="Ingresa un titulo para tu venta", name="titulo", required )
+							p.help-block Ejemplo: Vendo auto sentra 2008 plateado, maximo 70 caracteres
+						|     
+						div.form-group
+							label.label.label-info(for="precio") Precio
+							input.form-control(type="number", min="1",maxlength="12", step="any", placeholder="Ingresa el precio", name="precio", required )
+							p.help-block Ejemplo: 800.00
+						|     
+						div.form-group
+							label.label.label-info(for="tipo_moneda") Tipo de moneda
+							select.form-control(name="tipo_moneda")
+								option(value="Pesos") Pesos
+								option(value="Dolares") Dolares
+								option(value="Euros") Euros
+							p.help-block Tipos: Pesos, Dolares, Euros
+						div.col-lg-2.col-md-2.col-sm-2.col-xs-2.pull-right
+							input(type="checkbox", name="precio_negociable")
+							| Permitir negociar
+							br
+							input(type="checkbox", name="local")
+							| Solo entrega local
+
+				div.form-group
+					label.label.label-info(for="descripcion_corta") Breve descripcion
+					input.form-control(type="text", maxlength="140", placeholder="Ingresa una descripcion corta acerca de tu producto", name="descripcion_corta", required )
+					p.help-block Ejemplo: La descripcion debe contener un maximo de 140 caracteres
+				div.form-group
+					label.label.label-info(for="descripcion") Descripcion
+					textarea#descripcion.form-control(placeholder="Ingresa descripcion de tu venta", name="descripcion", required)
+					p.help-block Ejemplo: El auto esta en excelentes condiciones tiene aire acondicionado
+				div.form-group
+					input.form-control#imagenesField(type="hidden", name="imagenes")
+					input.form-control#descripcionField(type="hidden", name="descripcionField")
+			div.row
+				div.text-center
+					button#btnGuardar.btn.btn-primary.btn-lg(type="button", onclick="enviaInformacion()") Guardar
+					hr
+	div.modal.fade#modalEliminaImagen(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
+		div.modal-dialog
+			div.modal-content
+				div.modal-header
+					button.close(type="button", data-dismiss="modal", aria-hidden="true") &times;
+					h4 Seguro que deseas eliminar la imagen.
+				div.modal-body
+					p Si eliminas la imagen el cambio sera permanente ¿estas seguro?
+				div.modal-footer
+					button.btn.btn-default(type="button", data-dismiss="modal") Cancelar
+					button#botonModalEliminar.btn.btn-danger(type="button") Eliminar
+	div.modal.fade#modalMensaje(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
+		div.modal-dialog
+			div.modal-content
+				div.modal-header
+					button.close(type="button", data-dismiss="modal", aria-hidden="true") &times;
+					h4#tituloModalMensaje
+				div.modal-body#bodyModalMensaje
+				div.modal-footer#footerModalMensaje
+
+				
+block append foot
+	script(src="http://malsup.github.com/jquery.form.js")
+	script(src="http://jquery.bassistance.de/validate/jquery.validate.js")
+	script(src="http://jquery.bassistance.de/validate/additional-methods.js")
+	script(src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/localization/messages_es.js")
+	script(src="/js/tinymce/tinymce.min.js")
+	script(src="/js/yosoyventas/subidas.js")
+	script(type='text/javascript').
+		cargarTiny("");
+		$('[rel="tooltip"]').tooltip();
+
+

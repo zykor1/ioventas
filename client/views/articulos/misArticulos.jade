@@ -1,0 +1,116 @@
+extends ../layout
+block index
+	nav.navbar(role="navigation")
+		div#links.navbar-fixed-top
+			div.col-lg-3.col-md-3.col-sm-3.col-xs-3
+				img#spanImg(src='https://graph.facebook.com/#{everyauth.facebook.user.id}/picture?width=80&height=80')
+				span#spanImg.label.label-primary #{ everyauth.facebook.user.name }
+			div.panel.panel-default
+				a.btn.btn-info(data-placement="bottom", rel="tooltip", data-toggle="tooltip", title="Ir a inicio", href="/principal")
+					span.glyphicon.glyphicon-home
+				|-
+				a.btn.btn-primary(data-placement="bottom", rel="tooltip", data-toggle="tooltip", title="Mis articulos",href="/misArticulos") 
+					span.glyphicon.glyphicon-th-large
+				|-
+				a.btn.btn-success(data-placement="bottom", rel="tooltip", data-toggle="tooltip", title="Ir a vender",href="/vender") 
+					span.glyphicon.glyphicon-usd
+				|-
+	div.row
+		div.container
+			h2 Mis articulos
+			if articulos == ''
+				div.text-center
+					img#imagenCuadro(src="/img/User.png")
+					h4 No tienes ningun articulo agrega uno :D
+					a.btn.btn-success.btn-lg(data-placement="bottom", rel="tooltip", data-toggle="tooltip", title="Ir a vender",href="/vender") 
+							span.glyphicon.glyphicon-usd
+							|   Ir a vender
+			div.row#contenedorArticulos
+				- var col = -1;
+				each articulo in articulos
+					- col++;
+					if col >= 3
+						div.row
+						- col = 0;
+
+					div.col-lg-4(id="#{articulo.id}articulo")
+						div.thumbnail#cuadroPrincipal
+							if (articulo.imagenes == undefined) || (articulo.imagenes.length == 0)
+								img#imagenCuadro(src="/img/no_imagen.png")
+								div.caption#wordwrap
+									- var titulo = articulo.titulo.replace(/ /g,"_");
+									a(rel="tooltip", data-toggle="tooltip", title="Ver mas", href="/mostrar/#{articulo.id}/#{titulo}")
+										h3= articulo.titulo
+									p= articulo.descripcion_corta
+									a.btn.btn-warning.btn-xs(rel="tooltip", data-toggle="tooltip", title="Editar articulo", href="/edita/#{articulo.id}/#{titulo}")
+										span.glyphicon.glyphicon-pencil
+									if articulo.postFaceId == undefined
+										a#botonPublicaFacebook.btn.btn-primary.btn-xs(onClick="publicaFace(\'#{articulo.id}\')", data-placement="bottom", rel="tooltip", data-toggle="tooltip", title="Publicar en facebook", href="#")
+											span.glyphicon.glyphicon-cloud-upload
+									a.btn.btn-danger.btn-xs(onClick="mandaEliminar(\'#{articulo.id}\')", data-toggle="modal", href="#modalEliminaArticulo", rel="tooltip", title="Eliminar este articulo")
+										span.glyphicon.glyphicon-trash								
+							else
+								if articulo.imagenes.length > 1
+									div.carousel.slide(id=articulo.id)
+										ol.carousel-indicators
+											each imagen,i in articulo.imagenes
+												if i === 0
+													li.active(data-target="##{articulo.id}", data-slide-to=i, data-interval="2000")
+												else
+													li(data-target="##{articulo.id}", data-slide-to=i)
+										div.carousel-inner
+											each imagen,i in articulo.imagenes
+												if i === 0
+													div.item.active.thumbnail
+														img#imagenCuadro(src=imagen.imagen)
+												else
+													div.item.thumbnail
+														img#imagenCuadro(src=imagen.imagen)														
+										a.left.carousel-control(data-slide="prev", href="##{articulo.id}")
+											span.icon-prev
+										a.right.carousel-control(data-slide="next", href="##{articulo.id}")
+											span.icon-next
+									div.caption#wordwrap
+										- var titulo = articulo.titulo.replace(/ /g,"_");
+										a(rel="tooltip", data-toggle="tooltip", title="Ver mas", href="/mostrar/#{articulo.id}/#{titulo}")
+											h3= articulo.titulo
+										p= articulo.descripcion_corta
+										a.btn.btn-warning.btn-xs(rel="tooltip", data-toggle="tooltip", title="Editar articulo", href="/edita/#{articulo.id}/#{titulo}")
+											span.glyphicon.glyphicon-pencil
+										if articulo.postFaceId == undefined
+											a#botonPublicaFacebook.btn.btn-primary.btn-xs(onClick="publicaFace(\'#{articulo.id}\')", data-placement="bottom", rel="tooltip", data-toggle="tooltip", title="Publicar en facebook", href="#")
+												span.glyphicon.glyphicon-cloud-upload
+										a.btn.btn-danger.btn-xs(onClick="mandaEliminar(\'#{articulo.id}\')", data-toggle="modal", href="#modalEliminaArticulo", rel="tooltip", title="Eliminar este articulo")
+											span.glyphicon.glyphicon-trash	
+								else
+									each imagen in articulo.imagenes
+										img#imagenCuadro(src=imagen.imagen)
+									div#wordwrap.caption
+										- var titulo = articulo.titulo.replace(/ /g,"_");
+										a(rel="tooltip", data-toggle="tooltip", title="Ver mas", href="/mostrar/#{articulo.id}/#{titulo}")
+											h3= articulo.titulo
+										p= articulo.descripcion_corta
+										a.btn.btn-warning.btn-xs(rel="tooltip", data-toggle="tooltip", title="Editar articulo", href="/edita/#{articulo.id}/#{titulo}")
+											span.glyphicon.glyphicon-pencil
+										if articulo.postFaceId == undefined
+											a#botonPublicaFacebook.btn.btn-primary.btn-xs(onClick="publicaFace(\'#{articulo.id}\')", data-placement="bottom", rel="tooltip", data-toggle="tooltip", title="Publicar en facebook", href="#")
+												span.glyphicon.glyphicon-cloud-upload
+										a.btn.btn-danger.btn-xs(onClick="mandaEliminar(\'#{articulo.id}\')", data-toggle="modal", href="#modalEliminaArticulo", rel="tooltip", title="Eliminar este articulo")
+											span.glyphicon.glyphicon-trash
+	div.modal.fade#modalEliminaArticulo(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
+		div.modal-dialog
+			div.modal-content
+				div.modal-header
+					button.close(type="button", data-dismiss="modal", aria-hidden="true") &times;
+					h4 Seguro que deseas eliminar el articulo.
+				div.modal-body
+					p Si eliminas el articulo el cambio sera permanente ¿estas seguro?
+				div.modal-footer
+					button.btn.btn-default(type="button", data-dismiss="modal") Cancelar
+					button#botonModalEliminarArticulo.btn.btn-danger(type="button") Eliminar
+	div#modals
+block append foot
+	script(src="/js/yosoyventas/misArticulos.js")
+	script(type='text/javascript').
+		$('.carousel').carousel();
+		$('[rel="tooltip"]').tooltip();

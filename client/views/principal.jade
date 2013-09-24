@@ -1,0 +1,29 @@
+extends layout
+block index
+	nav.navbar(role="navigation")
+		div#links.navbar-fixed-top
+			div.col-lg-3.col-md-3.col-sm-3.col-xs-3
+				img#spanImg(src='https://graph.facebook.com/#{everyauth.facebook.user.id}/picture?width=80&height=80')
+				span#spanImg.label.label-primary #{ everyauth.facebook.user.name }
+			div.panel.panel-default
+				a.btn.btn-info(data-placement="bottom", rel="tooltip", data-toggle="tooltip", title="Ir a inicio", href="/principal")
+					span.glyphicon.glyphicon-home
+				|-
+				a.btn.btn-primary(data-placement="bottom", rel="tooltip", data-toggle="tooltip", title="Mis articulos",href="/misArticulos") 
+					span.glyphicon.glyphicon-th-large
+				|-
+				a.btn.btn-success(data-placement="bottom", rel="tooltip", data-toggle="tooltip", title="Ir a vender",href="/vender") 
+					span.glyphicon.glyphicon-usd
+	div.row
+		div.container
+			h2 Inicio
+			div.row#contenedorCuadros
+	p#escondido.hide
+block append foot
+	script(src="/js/yosoyventas/paginacion.js")
+	script(type='text/javascript').
+		//$('#escondido').html('#{articulos_txt}');
+		//var info = $('#escondido').text();
+		paginar();
+		$('.carousel').carousel();
+		$('[rel="tooltip"]').tooltip();
